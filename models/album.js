@@ -11,7 +11,18 @@ var albumSchema = new mongoose.Schema({
 albumSchema.statics.getAlbums = function (callback) {
     Album.find({}, function (error, albumData) {
         if (error || !albumData) return callback(error || { error: "There are no albums" });
-        return callback(null, albumData);
+        callback(null, albumData);
+    });
+};
+
+albumSchema.statics.updateAlbumName = function (updateData, callback) {
+    Album.findById(updateData._id,  function (error, albumData) {
+        if(error) return callback(error);
+        albumData.albumName = updateData.updatedName;
+        albumData.save(function (error, savedAlbum) {
+            if(error) return callback(error);
+            callback(null, savedAlbum);
+        })
     });
 };
 

@@ -46,6 +46,20 @@ describe("Image", function () {
         });
     });
 
+    describe(".updateImageDescription()", function () {
+       it("should update the description of an existing image.", function (callback) {
+           var updateData = {
+               _id : "573d40daecf7c2ae107a5cf0",
+               updatedDescription: "UpdatedDescription"
+           };
+           Image.updateImageDescription(updateData, function (error, updatedImage) {
+               expect(error).to.not.exist;
+               expect(updatedImage.photoTitle).to.equal("UpdatedDescription");
+               callback();
+           });
+       });
+    });
+
     describe(".deleteImage()", function () {
         it("should delete a specific image stored on Mongo.", function (callback) {
             var imageToDelete = { _id : "573d40daecf7c2ae107a5cf0"};

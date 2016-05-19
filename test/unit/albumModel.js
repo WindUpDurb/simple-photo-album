@@ -51,6 +51,23 @@ beforeEach(function (callback) {
 
 describe("AlbumModel", function () {
 
+    describe(".updateAlbumName()", function () {
+        it("should update the name of an existing album.", function (callback) {
+            var dataToUpdateWith = {
+               albumName: "testAlbum",
+               _id: "573d382aa6f851a00c15f9c0",
+               updatedName: "ThisAnUpdate"
+            };
+
+            Album.updateAlbumName(dataToUpdateWith, function (error, updatedAlbum) {
+                console.log("updated album: ", updatedAlbum)
+                expect(error).to.not.exist;
+                expect(updatedAlbum.albumName).to.equal("ThisAnUpdate");
+                callback();
+            });
+        });
+    });
+
     describe(".addImageToAlbum()", function () {
         it("should add a specific image to a specific album", function (callback) {
             var testImageToAdd = { _id: "573d40daecf7c2ae107a5cf9" };
@@ -69,8 +86,6 @@ describe("AlbumModel", function () {
             var imageToRemove = { _id: "573d40daecf7c2ae10711111" };
             var albumToRemoveFrom = { _id : "573d382aa6f851a00c15f9c0" };
             Album.removeImageFromAlbum(imageToRemove, albumToRemoveFrom, function (error, savedImage, savedAlbum) {
-                console.log("Saved album: ", savedAlbum);
-                console.log("Saved image: ", savedImage);
                 expect(error).to.not.exist;
                 expect(savedAlbum.albumImages).to.have.length(0);
                 expect(savedImage.albumsIn).to.have.length(0);

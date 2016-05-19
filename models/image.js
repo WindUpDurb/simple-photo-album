@@ -17,6 +17,17 @@ imageSchema.statics.uploadImage = function (uploadData, callback) {
     });
 };
 
+imageSchema.statics.updateImageDescription = function (updateData, callback) {
+    Image.findById(updateData._id, function (error, imageData) {
+        if (error || !imageData) return callback(error || { error: "There is no image."});
+        imageData.photoTitle = updateData.updatedDescription;
+        imageData.save(function (error, savedImage) {
+            if (error) return callback(error);
+            callback(null, savedImage);
+        });
+    });
+};
+
 imageSchema.statics.retrieveImage = function (imageId, callback) {
     Image.findById(imageId, function (error, imageData) {
         if (error || !imageData) return callback(error || "There is no image.");
