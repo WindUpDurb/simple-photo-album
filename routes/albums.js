@@ -60,6 +60,6 @@ router.delete("/", function (request, response) {
         if (error) response.status(400).send(error);
         response.send("Album has been deleted.");
     });
-};
+});
 
 module.exports = router;
