@@ -35,6 +35,13 @@ imageSchema.statics.retrieveImage = function (imageId, callback) {
     });
 };
 
+imageSchema.statics.retrieveAllImages = function (callback) {
+    Image.find({}, function (error, imageList) {
+        if (error || !imageList) return callback(error || { error: "There are no images" });
+        callback(null, imageList);
+    });
+};
+
 imageSchema.statics.deleteImage = function (imageData, callback) {
     Image.findByIdAndRemove(imageData._id, function (error) {
         if (error) return callback(error);

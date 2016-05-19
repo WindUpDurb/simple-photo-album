@@ -81,4 +81,14 @@ describe("Image", function () {
         });
     });
 
+    describe(".retrieveAllImages()", function () {
+        it("should retrieve all the images stored on Mongo.", function (callback) {
+            Image.retrieveAllImages(function (error, imageList) {
+                expect(error).to.not.exist;
+                expect(imageList).to.exist;
+                callback();
+            });
+        });
+    });
+
 });
