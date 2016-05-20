@@ -70,8 +70,8 @@ describe("AlbumModel", function () {
 
     describe(".addImageToAlbum()", function () {
         it("should add a specific image to a specific album", function (callback) {
-            var testImageToAdd = { _id: "573d40daecf7c2ae107a5cf9" };
-            var testAlbum = { _id: "573d382aa6f851a00c15f9c0" };
+            var testImageToAdd = "573d40daecf7c2ae107a5cf9";
+            var testAlbum = "573d382aa6f851a00c15f9c0";
             Album.addImageToAlbum(testImageToAdd, testAlbum, function (error, savedAlbum, savedImage) {
                 expect(error).to.not.exist;
                 expect(savedAlbum.albumImages[1].toString()).to.equal("573d40daecf7c2ae107a5cf9");
@@ -106,7 +106,7 @@ describe("AlbumModel", function () {
 
     describe(".getSpecificAlbum()", function () {
         it("should retrieve the data of one specific album stored on Mongo", function (callback) {
-            Album.getSpecificAlbum({ _id: "573d382aa6f851a00c15f9c0"}, function (error, albumData) {
+            Album.getSpecificAlbum("573d382aa6f851a00c15f9c0", function (error, albumData) {
                 expect(error).to.not.exist;
                 expect(albumData.albumName).to.equal("testAlbum");
                 callback();

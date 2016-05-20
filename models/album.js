@@ -26,11 +26,12 @@ albumSchema.statics.updateAlbumName = function (updateData, callback) {
     });
 };
 
-albumSchema.statics.getSpecificAlbum = function (albumData, callback) {
-    Album.findById(albumData._id, function (error, albumData) {
+albumSchema.statics.getSpecificAlbum = function (albumId, callback) {
+    Album.findById(albumId, function (error, albumData) {
         if (error || !albumData) return callback(error || { error : "There is no album" });
         return callback(null, albumData);
-    });
+    })
+        .populate("albumImages");
 };
 
 albumSchema.statics.createAlbum = function (newAlbumData, callback) {
@@ -48,9 +49,9 @@ albumSchema.statics.deleteAlbum = function (albumData, callback) {
 };
 
 albumSchema.statics.addImageToAlbum = function (imageToAdd, albumToAddTo, callback) {
-    Album.findById(albumToAddTo._id, function (error, albumData) {
+    Album.findById(albumToAddTo, function (error, albumData) {
         if (error || !albumData) return callback(error || "There is no album.");
-        Image.findById(imageToAdd._id, function (error, imageData) {
+        Image.findById(imageToAdd, function (error, imageData) {
             if (error || !imageData) return callback(error || "There is no image.");
             albumData.albumImages.push(imageData._id);
             imageData.albumsIn.push(albumData._id);

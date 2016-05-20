@@ -1,0 +1,30 @@
+<h1 style="margin-top: 150px" class="text-center">Upload a photo to this collection:</h1>
+<h3 class="text-center">{{currentAlbum.albumName}}</h3>
+<div style="margin-top: 100px" class="text-center">
+    <form ng-submit="uploadImageToAlbum()">
+        <row>
+            <div style="margin-top: 20px" class="well well-sm col-sm-offset-2 col-sm-8">
+                <div class="row">
+                    <div class=" col-sm-offset-3 col-sm-6">
+                        <div class="form-group label-static">
+                            <label  class="control-label">Photo Url</label>
+                            <input ng-model="uploadPhoto.imageUrl"  type="text" class="form-control" placeholder="What is the URL to the image?" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-sm-offset-3 col-sm-6">
+                        <div class="form-group label-static">
+                            <label  class="control-label">Photo Description</label>
+                            <input ng-model="uploadPhoto.photoTitle"  type="text" class="form-control" placeholder="Include a description for your photo.">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <button class="btn btn-primary">Upload Photo</button>
+            </div>
+        </row>
+    </form>
+</div>

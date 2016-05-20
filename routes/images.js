@@ -28,6 +28,7 @@ router.get("/:imageId", function (request, response) {
 });
 
 router.put("/updateImage", function (request, response) {
+    console.log(request.body)
     Image.updateImageDescription(request.body, function (error, updatedImage) {
         if (error) response.status(400).send();
         response.send(updatedImage);

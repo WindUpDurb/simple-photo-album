@@ -1,0 +1,15 @@
+<h4 class="text-center">Album Contents:</h4>
+
+<div class="text-center" ng-if="currentAlbum.albumImages.length === 0">
+    <p>You have an empty album.</p>
+    <p>Add some images.</p>
+</div>
+
+<div ng-if="currentAlbum.albumImages.length > 0">
+    <ul style="list-style: none">
+        <li style="margin-top: 30px" ng-repeat="image in currentAlbum.albumImages">
+            <a ng-href="/#/albums/{{currentAlbum._id}}/{{image._id}}"><img class="img-responsive center-block img-thumbnail" ng-src="{{image.imageUrl}}">
+            </a>
+        </li>
+    </ul>
+</div>

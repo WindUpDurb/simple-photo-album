@@ -1,0 +1,31 @@
+
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+        <div class="col-sm-offset-4 col-sm-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="{{currentImage.imageUrl}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <form ng-submit="submitPhotoEdits()">
+        <div style="margin-top: 20px" class="col-sm-offset-2 col-sm-8">
+            <div class="row">
+                <div class=" col-sm-offset-3 col-sm-6">
+                    <div class="form-group label-static">
+                        <label  class="control-label">{{currentImage.photoTitle}}</label>
+                        <input ng-model="updatedData.updatedDescription"  type="text" class="form-control" placeholder="Rename the Photo?">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button class="btn btn-primary">Submit Edits</button>
+            <button type="button" class="btn btn-danger" ng-click="deletePhoto()">Delete Photo</button>
+        </div>
+    </form>
+</div>
+
+

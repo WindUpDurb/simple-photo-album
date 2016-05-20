@@ -23,9 +23,13 @@ router.route("/")
 router.put("/addImage", function (request, response) {
     var imageToAdd = request.body.imageId;
     var albumToAddTo = request.body.albumToAddId;
+    console.log("album to add to : ", albumToAddTo)
     Album.addImageToAlbum(imageToAdd, albumToAddTo, function (error, savedAlbum, savedImage) {
-        if (error) response.status(400).send();
-        response.send({ savedAlbum: savedAlbum, savedImage: savedImage });
+        if (error)  {
+            response.status(400).send(error)
+        } else {
+            response.send({ savedAlbum: savedAlbum, savedImage: savedImage });
+        }
     });
 });
 
@@ -55,10 +59,10 @@ router.get("/:albumId", function (request, response) {
 });
 
 router.delete("/", function (request, response) {
-    var toDelete = request.body._id;
-    Album.deleteAlbum(toDelete, function (error) {
+    console.log("Here")
+    Album.deleteAlbum(request.body, function (error, updatedAlbum) {
         if (error) response.status(400).send(error);
-        response.send("Album has been deleted.");
+        response.send(updatedAlbum);
     });
 });
 

@@ -3,6 +3,9 @@
 var mongoose = require("mongoose");
 var moment = require("moment");
 
+var Album = require("./album");
+
+
 var imageSchema = new mongoose.Schema({
     imageUrl: { type: String, required: true },
     postedAt: { type: Date, default: moment().format() },
@@ -44,8 +47,7 @@ imageSchema.statics.retrieveAllImages = function (callback) {
 
 imageSchema.statics.deleteImage = function (imageData, callback) {
     Image.findByIdAndRemove(imageData._id, function (error) {
-        if (error) return callback(error);
-        callback(null);
+        callback(error);
     });
 };
 
