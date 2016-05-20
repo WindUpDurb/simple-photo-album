@@ -11,17 +11,74 @@
     <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
 
-    <!--Personal CSS-->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/other-css/simple-sidebar.css">
 
-    <!--Personal Angular-->
-    <script src="/js/module.js"></script>
-    <script src="/js/services.js"></script>
-    <script src="/js/controllers.js"></script>
+    <!--Personal-->
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/concat.js"></script>
 
 
 </head>
-<body ng-app="nameOfApp" ng-controller="mainController">
+<body ng-app="photoAlbum" ng-controller="mainController">
+
+<!-- Left-hand menu bar; be able to navigate a directory in it. Can select between
+Albums, which the titles populate the side menu. When an album is clicked its details populate the body
+and, its contents fill the side bar
+when one of those small images is clicked, it is enlarged and populates the body; album name can be clicked
+again to repopulate with album info-->
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a ui-sref="home">
+                    Photo Album
+                </a>
+            </li>
+            <li>
+                <a href="#">User Profile</a>
+            </li>
+            <li>
+                <a href="#">Albums</a>
+            </li>
+            <li>
+                <a href="#">All Images</a>
+            </li>
+        </ul>
+        <div id="directoryContents" ui-view="directoryContents">
+
+        </div>
+
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <!--Body-->
+
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
