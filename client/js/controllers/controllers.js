@@ -102,5 +102,27 @@ app.controller("albumsDirectoryController", function ($scope, AlbumServices) {
     };
 });
 
+app.controller("photoListController", function ($scope, $stateParams, ImageServices) {
+    console.log("Photo List Controller");
+    
+    ImageServices.retrieveAllPhotos()
+        .then(function (response) {
+            $scope.photoList = response.data;
+        })
+        .catch(function (error) {
+            console.log("Error: ", error);
+        });
 
+    if ($stateParams.photoId) {
+        ImageServices.retrievePhotoData($stateParams.photoId)
+            .then(function (response) {
+                $scope.currentImage = response.data;
+            })
+            .catch(function (error) {
+                console.log("Error: ", error);
+            })
+    }
+
+
+});
 

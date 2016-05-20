@@ -2,8 +2,8 @@
 
 var expect = require("chai").expect;
 
-var Album = require("../../models/album");
-var Image = require("../../models/image");
+var Album = require("../../../models/album");
+var Image = require("../../../models/image");
 
 var mongoose = require("mongoose");
 var MONGOURL = `mongodb://localhost/simple-photo-album-test`;

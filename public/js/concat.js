@@ -6,7 +6,42 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state("home", {
-            url: "/"
+            url: "/",
+            views: {
+                "body": {
+                    templateUrl: "/html/home.body.html"
+                }
+            }
+        })
+        .state("userProfile", {
+            url: "/userProfile",
+            views: {
+                "body": {
+                    templateUrl: "/html/userProfile.body.html"
+                }
+            }
+        })
+        .state("allImages", {
+            url: "/allImages",
+            views: {
+                "directoryContents": {
+                    templateUrl: "/html/photoList.html",
+                    controller: "photoListController"
+                }
+            }
+        })
+        .state("detailedImage", {
+            url: "/allImages/:photoId",
+            views: {
+                "directoryContents": {
+                    templateUrl: "/html/photoList.html",
+                    controller: "photoListController"
+                },
+                "body": {
+                    templateUrl: "/html/photoList.detailed.html",
+                    controller: "photoListController"
+                }
+            }
         })
         .state("albumList", {
             url: "/albums",
@@ -156,7 +191,29 @@ app.controller("albumsDirectoryController", function ($scope, AlbumServices) {
     };
 });
 
+app.controller("photoListController", function ($scope, $stateParams, ImageServices) {
+    console.log("Photo List Controller");
+    
+    ImageServices.retrieveAllPhotos()
+        .then(function (response) {
+            $scope.photoList = response.data;
+        })
+        .catch(function (error) {
+            console.log("Error: ", error);
+        });
 
+    if ($stateParams.photoId) {
+        ImageServices.retrievePhotoData($stateParams.photoId)
+            .then(function (response) {
+                $scope.currentImage = response.data;
+            })
+            .catch(function (error) {
+                console.log("Error: ", error);
+            })
+    }
+
+
+});
 
 
 "use strict";
@@ -184,6 +241,10 @@ app.service("AlbumServices", function ($http) {
 });
 
 app.service("ImageServices", function ($http) {
+
+    this.retrieveAllPhotos = function () {
+        return $http.get("/api/images/");
+    }
 
     this.uploadNewImage = function (imageToUpload) {
         return $http.post("/api/images/", imageToUpload);

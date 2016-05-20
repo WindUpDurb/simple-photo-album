@@ -1,7 +1,7 @@
 <h3 class="text-center">Your Albums</h3>
-<ul ng-if="albumList.length > 0">
+<ul style="list-style: none;" ng-if="albumList.length > 0">
     <li ng-repeat="album in albumList">
-        <a ng-href="/#/albums/{{album._id}}">{{album.albumName}}</a>
+        <a style="color: white" ng-href="/#/albums/{{album._id}}">{{album.albumName}}</a>
     </li>
 </ul>
 <h4 ng-if="albumList.length === 0" class="text-center">

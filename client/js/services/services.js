@@ -24,6 +24,10 @@ app.service("AlbumServices", function ($http) {
 
 app.service("ImageServices", function ($http) {
 
+    this.retrieveAllPhotos = function () {
+        return $http.get("/api/images/");
+    }
+
     this.uploadNewImage = function (imageToUpload) {
         return $http.post("/api/images/", imageToUpload);
     };

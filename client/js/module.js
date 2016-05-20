@@ -6,7 +6,42 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state("home", {
-            url: "/"
+            url: "/",
+            views: {
+                "body": {
+                    templateUrl: "/html/home.body.html"
+                }
+            }
+        })
+        .state("userProfile", {
+            url: "/userProfile",
+            views: {
+                "body": {
+                    templateUrl: "/html/userProfile.body.html"
+                }
+            }
+        })
+        .state("allImages", {
+            url: "/allImages",
+            views: {
+                "directoryContents": {
+                    templateUrl: "/html/photoList.html",
+                    controller: "photoListController"
+                }
+            }
+        })
+        .state("detailedImage", {
+            url: "/allImages/:photoId",
+            views: {
+                "directoryContents": {
+                    templateUrl: "/html/photoList.html",
+                    controller: "photoListController"
+                },
+                "body": {
+                    templateUrl: "/html/photoList.detailed.html",
+                    controller: "photoListController"
+                }
+            }
         })
         .state("albumList", {
             url: "/albums",
