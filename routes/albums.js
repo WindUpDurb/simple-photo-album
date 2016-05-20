@@ -58,8 +58,8 @@ router.get("/:albumId", function (request, response) {
     });
 });
 
-router.delete("/", function (request, response) {
-    console.log("Here")
+router.put("/deleteAlbum", function (request, response) {
+    console.log(request.body)
     Album.deleteAlbum(request.body, function (error, updatedAlbum) {
         if (error) response.status(400).send(error);
         response.send(updatedAlbum);

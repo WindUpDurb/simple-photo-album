@@ -6,7 +6,7 @@ app.controller("mainController", function () {
     console.log("Main Controller");
 });
 
-app.controller("albumContentsController", function ($scope, AlbumServices, ImageServices, $stateParams) {
+app.controller("albumContentsController", function ($scope, $state, AlbumServices, ImageServices, $stateParams) {
     console.log("Album Contents Controller");
     AlbumServices.retrieveAlbum($stateParams.albumId)
         .then(function (response) {
@@ -16,6 +16,20 @@ app.controller("albumContentsController", function ($scope, AlbumServices, Image
         .catch(function (error) {
             console.log("Error: ", error);
         });
+
+    $scope.deleteAlbum = function () {
+        var toDelete = {
+            _id: $stateParams.albumId
+        };
+
+        AlbumServices.deleteAlbum(toDelete)
+            .then(function (response) {
+                $state.go("albumList");
+            })
+            .catch(function (error) {
+                console.log("Error: ", error);
+            });
+    };
 
     $scope.uploadImageToAlbum = function () {
         var imageToUpload = angular.copy($scope.uploadPhoto);
@@ -29,6 +43,7 @@ app.controller("albumContentsController", function ($scope, AlbumServices, Image
             })
             .then(function (response) {
                 console.log("Added: ", response.data)
+                $state.go("albumList");
             })
             .catch(function (error) {
                 console.log("Error: ", error);
@@ -80,7 +95,7 @@ app.controller("detailedPhotoController", function ($scope, $state, $stateParams
 
 });
 
-app.controller("albumsDirectoryController", function ($scope, AlbumServices) {
+app.controller("albumsDirectoryController", function ($scope, $state, AlbumServices) {
     console.log("Album Directory Controller");
 
     AlbumServices.getAlbumList()
@@ -95,6 +110,8 @@ app.controller("albumsDirectoryController", function ($scope, AlbumServices) {
         AlbumServices.createNewAlbum($scope.newAlbum)
             .then(function (response) {
                 $scope.albumList.push(response.data);
+                $state.go("albumList");
+                $scope.newAlbum = null;
             })
             .catch(function (error) {
                 console.log("Error: ", error);

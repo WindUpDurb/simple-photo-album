@@ -42,7 +42,7 @@ albumSchema.statics.createAlbum = function (newAlbumData, callback) {
 };
 
 albumSchema.statics.deleteAlbum = function (albumData, callback) {
-    Album.findByIdAndRemove(albumData._id, function (error) {
+    Album.findByIdAndRemove(albumData, function (error) {
         if (error) return callback(error);
         callback(null);
     });

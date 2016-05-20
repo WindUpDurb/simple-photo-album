@@ -4,6 +4,10 @@ var app = angular.module("photoAlbum");
 
 app.service("AlbumServices", function ($http) {
 
+    this.deleteAlbum = function (albumId) {
+        return $http.put("/api/albums/deleteAlbum", albumId);
+    };
+
     this.getAlbumList = function () {
         return $http.get("/api/albums/")
     };
